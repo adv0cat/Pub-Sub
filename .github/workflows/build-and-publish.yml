@@ -22,18 +22,15 @@ jobs:
       - name: Build NPM package
         run: npm run build
 
-      - name: Copy LICENSE
-        run: cp LICENSE packages/core/LICENSE
-
       - name: Save package artifacts
         uses: actions/upload-artifact@v3
         with:
           name: core-package-artifacts
           path: |
-            packages/core/dist/index.*
-            packages/core/package.json
-            packages/core/LICENSE
-            packages/core/README.md
+            dist/index.*
+            package.json
+            LICENSE
+            README.md
 
   publish:
     needs: build
