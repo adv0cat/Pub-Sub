@@ -95,6 +95,16 @@ describe("library", () => {
         expect(mockSubscriber).toHaveBeenCalledWith("hello");
       });
 
+      it("should return false when unsub is called multiple times", () => {
+        const testTopic = topic();
+        const mockSubscriber = jest.fn();
+        const unsubscribe: Unsubscribe = testTopic.once(mockSubscriber);
+        const firstAttempt = unsubscribe();
+        const secondAttempt = unsubscribe();
+        expect(firstAttempt).toBe(true);
+        expect(secondAttempt).toBe(false);
+      });
+
       it("should execute unsubscribe function when subscribed with once", () => {
         const testTopic = topic();
         const mockSubscriber = jest.fn();
