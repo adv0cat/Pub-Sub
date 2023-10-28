@@ -126,5 +126,18 @@ describe("pub.sub library", () => {
         expect(mockSubscriber).not.toHaveBeenCalled();
       });
     });
+
+    describe("Argument Order", () => {
+      it("should maintain the order of arguments when publishing", () => {
+        const values = [1, "qwerty", 3];
+        const orderTopic = topic();
+
+        orderTopic.sub((...args) => {
+          expect(args).toStrictEqual(values);
+        });
+
+        orderTopic.pub(...values);
+      });
+    });
   });
 });
