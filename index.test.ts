@@ -62,20 +62,6 @@ describe("pub.sub library", () => {
       });
     });
 
-    describe("Unsubscribing All Subscribers", () => {
-      it("should unsubscribe all subscribers", () => {
-        const testTopic = topic();
-        const mockSubscriber1 = jest.fn();
-        const mockSubscriber2 = jest.fn();
-        testTopic.sub(mockSubscriber1);
-        testTopic.sub(mockSubscriber2);
-        testTopic.unSubAll();
-        testTopic.pub("hello");
-        expect(mockSubscriber1).not.toHaveBeenCalled();
-        expect(mockSubscriber2).not.toHaveBeenCalled();
-      });
-    });
-
     describe("Context Binding", () => {
       it("should handle context binding correctly", () => {
         const testTopic = topic();
@@ -124,6 +110,20 @@ describe("pub.sub library", () => {
         unsubscribe();
         testTopic.pub("hello");
         expect(mockSubscriber).not.toHaveBeenCalled();
+      });
+    });
+
+    describe("Unsubscribing All Subscribers", () => {
+      it("should unsubscribe all subscribers", () => {
+        const testTopic = topic();
+        const mockSubscriber1 = jest.fn();
+        const mockSubscriber2 = jest.fn();
+        testTopic.sub(mockSubscriber1);
+        testTopic.sub(mockSubscriber2);
+        testTopic.unSubAll();
+        testTopic.pub("hello");
+        expect(mockSubscriber1).not.toHaveBeenCalled();
+        expect(mockSubscriber2).not.toHaveBeenCalled();
       });
     });
 
