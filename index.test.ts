@@ -1,7 +1,7 @@
 import { describe, it, expect, jest } from "@jest/globals";
 import { pubSub, topic, type Unsubscribe } from "./index";
 
-describe("pub.sub library", () => {
+describe("library", () => {
   describe("pubSub function", () => {
     it("should create a new PubSub instance", () => {
       const pub = pubSub();

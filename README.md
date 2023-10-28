@@ -1,12 +1,12 @@
-# pub.sub
+# pubsub-api
 
-[![npm version](https://img.shields.io/npm/v/pub.sub)](https://www.npmjs.com/package/pub.sub)
-[![downloads](https://img.shields.io/npm/dw/pub.sub)](https://www.npmjs.com/package/pub.sub)
-[![bundle size](<https://img.shields.io/bundlejs/size/pub.sub?exports=pubSub%2Ctopic&label=bundlejs%20(gzip)>)](https://github.com/adv0cat/pub.sub)
-![npm type definitions](https://img.shields.io/npm/types/pub.sub)
+[![npm version](https://img.shields.io/npm/v/pubsub-api)](https://www.npmjs.com/package/pubsub-api)
+[![downloads](https://img.shields.io/npm/dw/pubsub-api)](https://www.npmjs.com/package/pubsub-api)
+[![bundle size](<https://img.shields.io/bundlejs/size/pubsub-api?exports=pubSub%2Ctopic&label=bundlejs%20(gzip)>)](https://github.com/adv0cat/pubsub-api)
+![npm type definitions](https://img.shields.io/npm/types/pubsub-api)
 ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-`pub.sub` is a type-safe topic-based Publish-Subscribe (PubSub) pattern implementation for TypeScript. Its lightweight design coupled with a simple API facilitates clean, decoupled architecture, allowing seamless communication across your application.
+`pubsub-api` is a type-safe topic-based Publish-Subscribe (PubSub) pattern implementation for TypeScript. Its lightweight design coupled with a simple API facilitates clean, decoupled architecture, allowing seamless communication across your application.
 
 ## Features
 
@@ -19,23 +19,23 @@
 
 ## Installation
 
-Install `pub.sub` via npm:
+Install `pubsub-api` via npm:
 
 ```bash
-npm install pub.sub --save
+npm install pubsub-api --save
 ```
 
 Or via yarn:
 
 ```bash
-yarn add pub.sub
+yarn add pubsub-api
 ```
 
 ## Quick Start
 
 ```ts
 // Import the pubSub function from the library
-import { pubSub } from "pub.sub";
+import { pubSub } from "pubsub-api";
 
 // Create a PubSub instance
 const pub = pubSub();
@@ -55,7 +55,7 @@ likeTopic.pub({ postId: "abc123" });
 unsubscribe();
 ```
 
-This basic flow demonstrates the core functionalities of `pub.sub`, helping you to set up a simple real-time messaging mechanism.
+This basic flow demonstrates the core functionalities of `pubsub-api`, helping you to set up a simple real-time messaging mechanism.
 
 ## Usage
 
@@ -65,7 +65,7 @@ In this section, we define interfaces for different types of notification events
 
 ```ts
 // Import the necessary functions from the library
-import { pubSub } from "pub.sub";
+import { pubSub } from "pubsub-api";
 
 // Define the topics interface
 interface Topics {
@@ -138,7 +138,7 @@ In this example, we create a topic for handling new group creation events, demon
 
 ```ts
 // Import the topic function from the library
-import { topic } from "pub.sub";
+import { topic } from "pubsub-api";
 
 // Create a topic for new group events
 const groups = topic<[groupName: string]>();

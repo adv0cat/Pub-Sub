@@ -1,5 +1,5 @@
 {
-  "name": "pub.sub",
+  "name": "pubsub-api",
   "version": "0.1.0",
   "description": "Topic-based PubSub pattern implementation for TypeScript",
   "type": "module",
@@ -25,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/adv0cat/pub.sub.git"
+    "url": "git+https://github.com/adv0cat/pubsub-api.git"
   },
   "keywords": [
     "pubsub",
@@ -45,9 +45,9 @@
   "author": "adv0cat",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adv0cat/pub.sub/issues"
+    "url": "https://github.com/adv0cat/pubsub-api/issues"
   },
-  "homepage": "https://github.com/adv0cat/pub.sub#readme",
+  "homepage": "https://github.com/adv0cat/pubsub-api#readme",
   "files": [
     "./dist/index.*"
   ]
