@@ -1,4 +1,4 @@
-type Receiver<Args extends any[] = any[]> = (...v: Args) => void;
+type Receiver<Args extends any[] = any[]> = (v: Args) => void;
 type TopicArgs<T> = T extends (...v: infer Args) => any
   ? Args
   : T extends any[]
@@ -46,13 +46,11 @@ export const topic = <Type = any[]>(): Topic<Type> => {
     Receiver<TopicArgs<Type>>
   >();
   return {
-    pub: (...v) => receivers.forEach((receiver) => receiver(...v)),
+    pub: (...v) => receivers.forEach((receiver) => receiver(v)),
     sub: (cb, ctx) => {
       receivers.set(
         cb,
-        ctx != null
-          ? (...args) => cb.call(ctx, ...args)
-          : (...args) => cb(...args),
+        ctx != null ? (args) => cb.call(ctx, ...args) : (args) => cb(...args),
       );
 
       return () => receivers.delete(cb);
@@ -60,9 +58,9 @@ export const topic = <Type = any[]>(): Topic<Type> => {
     once: (cb, ctx) => {
       receivers.set(
         cb,
-        ctx != null
-          ? (...args) => receivers.delete(cb) && cb.call(ctx, ...args)
-          : (...args) => receivers.delete(cb) && cb(...args),
+        (args) =>
+          receivers.delete(cb) &&
+          (ctx != null ? cb.call(ctx, ...args) : cb(...args)),
       );
 
       return () => receivers.delete(cb);
