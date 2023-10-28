@@ -10,5 +10,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "exclude": ["**/*.test.ts"]
 }
