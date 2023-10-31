@@ -33,9 +33,7 @@ export const pubSub = <Topics extends object = {}>(): PubSub<Topics> => {
   const topics = new Map<string | keyof Topics, Topic<[]>>();
   return {
     topic: (title) =>
-      topics.has(title)
-        ? topics.get(title)!
-        : topics.set(title, topic()).get(title)!,
+      topics.get(title) || topics.set(title, topic()).get(title)!,
     unSubAll: () => topics.forEach((topic) => topic.unSubAll()),
   };
 };
@@ -45,6 +43,8 @@ export const topic = <Type = any[]>(): Topic<Type> => {
     Subscriber<TopicArgs<Type>>,
     Receiver<TopicArgs<Type>>
   >();
+  const remove = (cb: Subscriber<TopicArgs<Type>>) => receivers.delete(cb);
+
   return {
     pub: (...v) => receivers.forEach((receiver) => receiver(v)),
     sub: (cb, ctx) => {
@@ -53,20 +53,18 @@ export const topic = <Type = any[]>(): Topic<Type> => {
         ctx != null ? (args) => cb.call(ctx, ...args) : (args) => cb(...args),
       );
 
-      return () => receivers.delete(cb);
+      return () => remove(cb);
     },
     once: (cb, ctx) => {
       receivers.set(
         cb,
         (args) =>
-          receivers.delete(cb) &&
-          (ctx != null ? cb.call(ctx, ...args) : cb(...args)),
+          remove(cb) && (ctx != null ? cb.call(ctx, ...args) : cb(...args)),
       );
 
-      return () => receivers.delete(cb);
+      return () => remove(cb);
     },
-    unSub: (cb) => receivers.delete(cb),
+    unSub: (cb) => remove(cb),
     unSubAll: () => receivers.clear(),
   };
 };
-
