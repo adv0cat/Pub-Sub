@@ -38,6 +38,8 @@ export const pubSub = <Topics extends object = {}>(): PubSub<Topics> => {
   };
 };
 
+let queue = [] as any[];
+
 export const topic = <Type = any[]>(): Topic<Type> => {
   const receivers = new Map<
     Subscriber<TopicArgs<Type>>,
@@ -46,7 +48,31 @@ export const topic = <Type = any[]>(): Topic<Type> => {
   const remove = (cb: Subscriber<TopicArgs<Type>>) => receivers.delete(cb);
 
   return {
-    pub: (...v) => receivers.forEach((receiver) => receiver(v)),
+    pub: (...v) => {
+      // run queue
+      if (queue.push(v, receivers) === 2) {
+        setTimeout(() => {
+          for (
+            let msg, queueIndex = 0;
+            (msg = queue[queueIndex]);
+            queueIndex += 2
+          ) {
+            for (const queueItem of queue[queueIndex + 1] as Map<
+              Subscriber,
+              Receiver
+            >) {
+              try {
+                queueItem[1](msg);
+              } catch (e) {
+                console.error(e);
+              }
+            }
+          }
+
+          queue = [];
+        }, 0);
+      }
+    },
     sub: (cb, ctx) => {
       receivers.set(
         cb,
