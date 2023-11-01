@@ -1,6 +1,6 @@
 {
   "name": "pubsub-api",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Topic-based PubSub pattern implementation for TypeScript",
   "type": "module",
   "main": "dist/index.js",
