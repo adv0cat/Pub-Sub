@@ -1,5 +1,9 @@
 # pubsub-api
 
+<p align="center">
+    <img src="logo.png" width="360" alt="logo"/>
+</p>
+
 [![npm version](https://img.shields.io/npm/v/pubsub-api)](https://www.npmjs.com/package/pubsub-api)
 [![downloads](https://img.shields.io/npm/dw/pubsub-api)](https://www.npmjs.com/package/pubsub-api)
 [![bundle size](https://img.shields.io/bundlejs/size/pubsub-api?exports=pubSub%2Ctopic&label=bundlejs%20(gzip))](https://github.com/adv0cat/pubsub-api)
